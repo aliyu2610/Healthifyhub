@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lstyle.css">
+    <title>Vshoppy | Login</title>
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo">
+                <p>Vshoppy</p>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#" class="link active">Home</a></li>
+                    <li><a href="#" class="link" onclick="scrollToAbout()">About</a></li>
+                    <li><a href="#" class="link" onclick="scrollToSection('contact')">Contact US</a></li>
+                </ul>
+            </div>
+            <div class="nav-button">
+                <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+            </div>
+        </nav>
+
+        <div class="form-box">
+            <!-- Login Form -->
+            <div class="login-container" id="login">
+                <div class="top">
+                    <header>Login</header>
+                </div>
+                <div class="input-box">
+                    <input type="text" id="loginEmail" class="input-field" placeholder="VIT Mail ID">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box" style="margin-top: 11px;">
+                    <input type="password" id="loginPassword" class="input-field" placeholder="Password">
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box" style="margin-top: 15px;">
+                    <input type="submit" class="submit" value="Sign In" onclick="login()">
+                </div>
+                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" id="login-check">
+                        <label for="login-check"> Remember Me</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="about-container" id="about">
+        <div class="top">
+            <header>About Vshoppy</header>
+        </div>
+        <div class="content">
+            <p>Welcome to Vshoppy, your one-stop destination for all your shopping needs. We offer a wide range of products, including electronics, fashion, home decor, and much more. Our mission is to provide our customers with the best shopping experience by offering high-quality products at affordable prices. With fast and reliable delivery, secure payment options, and excellent customer service, we strive to make your shopping experience enjoyable and hassle-free. Shop with confidence at Vshoppy!</p>
+        </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="contact-container" id="contact">
+        <div class="top">
+            <header>Contact Us</header>
+        </div>
+        <div class="content">
+            <form id="contactForm" onsubmit="return submitForm()">
+                <div class="input-box">
+                    <input type="text" id="contactName" class="input-field" placeholder="Your Name" required>
+                </div>
+                <div class="input-box">
+                    <input type="email" id="contactEmail" class="input-field" placeholder="Your Email" required>
+                </div>
+                <div class="input-box">
+                    <textarea id="contactMessage" class="input-field" placeholder="Your Message" required></textarea>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Validation -->
+    <script>
+        function formValidation() {
+            var uid = document.getElementById('loginEmail');
+            var passid = document.getElementById('loginPassword');
+
+            if (!vitmail_validation(uid)) {
+                return false;
+            }
+
+            if (!passid_validation(passid)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        function vitmail_validation(uid) {
+            var vitmail = uid.value.trim();
+            var validPattern = /^[\w.-]+@vitstudent\.ac\.in$/;
+
+            if (!validPattern.test(vitmail)) {
+                alert("Please enter a valid VIT mail ID in the format 'abc.v20XX@vitstudent.ac.in'");
+                uid.focus();
+                return false;
+            }
+            return true;
+        }
+
+        function passid_validation(passid) {
+            var passid_len = passid.value.length;
+
+            if (passid_len === 0) {
+                alert("Password cannot be empty");
+                passid.focus();
+                return false;
+            }
+            return true;
+        }
+
+        function login() {
+            if (formValidation()) {
+                // Redirect to the index page upon successful login
+                window.location.href = "index.html";
+            }
+        }
+
+        function scrollToAbout() {
+            var aboutSection = document.getElementById("about");
+            aboutSection.scrollIntoView({ behavior: "smooth" });
+        }
+
+        function scrollToSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+
+        function submitForm() {
+            // Handle form submission
+            alert("Form submitted successfully!");
+            return false; // Prevent default form submission
+        }
+    </script>
+</body>
+</html>

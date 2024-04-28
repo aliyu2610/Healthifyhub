@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VShoppy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <p class="logo">VShoppy</p>
+    <div class="cart"><i class="fa-solid fa-cart-shopping"></i><img class="cartimg" src ="unnamed.webp"><p id="count">0</p></div>
+  </div>
+  <div class="search-container">
+    <div id="search-bar">
+      <input type="text" placeholder="Search products..." id="search-input">
+      <button id="search-button" onclick="searchProducts()">Search</button>
+      <button id="list-item-button">List Item</button>
+    </div>
+  </div>
+  <p id="featured-products">Featured Products</p> 
+  <div id="product-listings">
+    <!-- Product listings will be dynamically populated here -->
+  </div>
+  <div class="container">
+    <div id="root"></div>
+    <div class="sidebar">
+      <div class="head"><p>My Cart</p></div>
+      <div id="cartItem">Your cart is empty</div>
+      <div class="foot">
+        <h3>Total</h3>
+        <h2 id="total">Rs. 0.00</h2>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="app.js"></script>
+  <script type="module" src="/src/main.jsx"></script>
+  <script>
+    $(document).ready(function() {
+      // Retrieve the submitted product from localStorage
+      var submittedProduct = localStorage.getItem('submittedProduct');
+
+      if (submittedProduct) {
+        // Parse the JSON string to get the product object
+        var product = JSON.parse(submittedProduct);
+
+        // Construct HTML for the featured product
+        var featuredProductHTML = `
+          <div class="product">
+            <h3>${product.name}</h3>
+            <p>Price: Rs. ${product.price}</p>
+            <img src="${product.image}" alt="${product.name}">
+          </div>
+        `;
+
+        // Insert the featured product HTML into the page
+        $('#product-listings').html(featuredProductHTML);
+
+        // Optional: Clear the submitted product from localStorage
+        localStorage.removeItem('submittedProduct');
+      }
+    });
+  </script>
+</body>
+</html>
